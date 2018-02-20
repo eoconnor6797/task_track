@@ -1,5 +1,4 @@
 <h2>Edit Task</h2>
-
-<%= render "form.html", Map.put(assigns, :action, task_path(@conn, :update, @task)) %>
+<h1>NO HACKING</h2>
 
 <span><%= link "Back", to: page_path(@conn, :tasklist) %></span>
