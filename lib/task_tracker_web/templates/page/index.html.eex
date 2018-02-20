@@ -1,0 +1,21 @@
+<h1>Welcome to the Task Tacker</h1>
+<%= if @current_user do %>
+  <div class="row">
+    <div class="col">
+      <%= link "New Task", to: task_path(@conn, :new), class: "btn btn-primary" %>
+      <%= link "In Progress Tasks", to: page_path(@conn, :tasklist), class: "btn btn-warning" %>
+      <%= link "Completed Tasks", to: page_path(@conn, :completed), class: "btn btn-success" %>
+    </div>
+  </div>
+  <% else %>
+  <h2>Please log in to see tasks</h2>
+  <%= form_tag("/session", method: :post) do %>
+    <div class="form-group">
+      <input type="email" name="email" placeholder="Enter email here" >
+    </div>
+      <div class="form-group">
+        <button class="btn btn-primary">Log in</button>
+        <%= link "Register", to: user_path(@conn, :new) %>
+      </div>
+    <% end %>
+  <% end %>

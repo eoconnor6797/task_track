@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col">
+    <%= if @current_user do %>
+      <%= link "New Task", to: task_path(@conn, :new), class: "btn btn-primary" %>
+    <% end %>
+    <%= link "In Progress Tasks", to: page_path(@conn, :tasklist), class: "btn btn-warning" %>
+  </div>
+</div>
+
+<h1>Completed Tasks</h1>
+
+<%= Enum.map @tasklist, fn task ->  %>
+  <%= if task.completed do %>
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title"><%= task.title %></h4>
+            <p>Assigned to: <%= task.user.name %></p>
+            <p><%= task.body %></p>
+            <p>Time Spent: <%= task.time %> minutes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
