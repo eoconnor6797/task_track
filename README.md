@@ -1,10 +1,10 @@
 # TaskTracker
-Users can register and log to the task tracker
-Logged in users will see a link from the login page to the in progress tasks, completed tasks, and a form to make new tasks
-Users can assign tasks to other users
-Users can log work on tasked that are assigned to them and mark them as complete
-Users can reassign tasks that are assigned to them
-Completed tasks cannot be modified
+* Users can register and log to the task tracker
+* Logged in users will see a link from the login page to the in progress tasks, completed tasks, and a form to make new tasks
+* Users can assign tasks to other users
+* Users can log work on tasked that are assigned to them and mark them as complete
+* Users can reassign tasks that are assigned to them
+* Completed tasks cannot be modified
 
 To start your Phoenix server:
 
