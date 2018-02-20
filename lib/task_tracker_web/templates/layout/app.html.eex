@@ -22,6 +22,7 @@
           </p>
         <% else %>
           <p>Not logged in.</p>
+          <%= link "Log in here", to: page_path(@conn, :index) %>
         <% end %>
       </div>
     </div>
