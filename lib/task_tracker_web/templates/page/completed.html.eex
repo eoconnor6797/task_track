@@ -1,11 +1,3 @@
-<div class="row">
-  <div class="col">
-    <%= if @current_user do %>
-      <%= link "New Task", to: task_path(@conn, :new), class: "btn btn-primary" %>
-    <% end %>
-    <%= link "In Progress Tasks", to: page_path(@conn, :tasklist), class: "btn btn-warning" %>
-  </div>
-</div>
 
 <h1>Completed Tasks</h1>
 
@@ -19,6 +11,7 @@
             <p>Assigned to: <%= task.user.name %></p>
             <p><%= task.body %></p>
             <p>Time Spent: <%= task.time %> minutes</p>
+            <%= link "Details", to: task_path(@conn, :show, task), class: "btn btn-warning" %>
           </div>
         </div>
       </div>

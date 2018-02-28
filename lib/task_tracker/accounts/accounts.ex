@@ -35,8 +35,17 @@ defmodule TaskTracker.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id)
-
+  def get_user!(id) do 
+    Repo.get!(User, id)
+    |> Repo.preload(:manager)
+  end
+  
+  def get_lackies!(id) do
+    query = from u in User,
+          where: u.manager_id == ^id ,
+          select: u
+    Repo.all(query)
+  end
   @doc """
   Creates a user.
 

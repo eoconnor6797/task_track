@@ -16,4 +16,13 @@ defmodule TaskTrackerWeb.PageController do
     changeset = TaskTracker.Tracker.change_task(%TaskTracker.Tracker.Task{})
     render conn, "completed.html", tasklist: tasks, changeset: changeset
   end
+   
+  def lackies_tasks(conn, _params) do
+    user_id = get_session(conn, :user_id)
+    changeset = TaskTracker.Tracker.change_task(%TaskTracker.Tracker.Task{})
+    lackys = TaskTracker.Accounts.get_lackies!(user_id)
+    all_tasks = TaskTracker.Tracker.list_tasks()
+    lacky_tasks = Enum.filter(all_tasks, fn task -> Enum.member?(lackys, task.user) end) 
+    render conn, "lacky.html", tasklist: lacky_tasks, changeset: changeset
+  end
 end

@@ -27,7 +27,8 @@ defmodule TaskTrackerWeb.TaskController do
 
   def show(conn, %{"id" => id}) do
     task = Tracker.get_task!(id)
-    render(conn, "show.html", task: task)
+    times = TaskTracker.Tracker.get_times!(id)
+    render(conn, "show.html", task: task, times: times)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -38,8 +39,9 @@ defmodule TaskTrackerWeb.TaskController do
 
   def assign(conn, %{"id" => id}) do
     task = Tracker.get_task!(id)
+    manager = TaskTracker.Accounts.get_user!(task.user.id).manager
     changeset = Tracker.change_task(task)
-    render(conn, "assign.html", task: task, changeset: changeset)
+    render(conn, "assign.html", task: task, manager: manager, changeset: changeset)
   end
 
   def logwork(conn, %{"id" => id}) do

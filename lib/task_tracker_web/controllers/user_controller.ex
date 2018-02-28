@@ -27,7 +27,8 @@ defmodule TaskTrackerWeb.UserController do
 
   def show(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
-    render(conn, "show.html", user: user)
+    lackies = Accounts.get_lackies!(id)
+    render(conn, "show.html", user: user, lackies: lackies)
   end
 
   def edit(conn, %{"id" => id}) do

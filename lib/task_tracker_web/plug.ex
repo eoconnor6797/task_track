@@ -12,4 +12,10 @@ defmodule TaskTrackerWeb.Plug do
     users = TaskTracker.Accounts.list_users()
     assign(conn, :users, users)
   end
+
+  def get_lackies(conn, _params) do
+    user_id = get_session(conn, :user_id)
+    lackies = TaskTracker.Accounts.get_lackies!(user_id || -1)
+    assign(conn, :lackies, lackies)
+  end
 end

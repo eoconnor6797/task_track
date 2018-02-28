@@ -1,4 +1,8 @@
 <h2>Show Task</h2>
+<script>
+  window.timeblock_path = "<%= time_block_path(@conn, :index) %>";
+window.task_id = "<%= @task.id %>";
+</script>
 
 <ul>
 
@@ -26,6 +30,27 @@
     <strong>User:</strong>
     <%= @task.user.name %>
   </li>
+
+  <li>
+    <strong>Timeblocks:</strong>
+    <%= Enum.map @times, fn time -> %>
+      <div class="row">
+        <div class="col">
+          <strong>Start:</strong>
+          <%= time.start_time %>
+        </div>
+        <div class="col">
+          <strong>End:</strong>
+          <%= time.end_time %>
+        </div>
+      </div>
+    <% end %>
+    <%= if @current_user == @task.user and not @task.completed do %>
+      <div class="manual">
+        <button class="add-time-block btn btn-primary" data-task-id="<%= @task.id %>" 
+                data-time-start="<%= 'hello' %>">Add Time Block</button>
+      </div>
+    <% end %>
 
 </ul>
 

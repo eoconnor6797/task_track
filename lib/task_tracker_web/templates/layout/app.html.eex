@@ -27,6 +27,18 @@
       </div>
     </div>
     <div class="container">
+      <div class="row">
+        <div class="col">
+          <%= if @current_user do %>
+            <%= link "New Task", to: task_path(@conn, :new), class: "btn btn-primary" %>
+            <%= link "Profile", to: user_path(@conn, :show, @current_user), class: "btn btn-info" %>
+          <% end %>
+          <%= link "In Progress Tasks", to: page_path(@conn, :tasklist), class: "btn btn-warning" %>
+          <%= link "Completed Tasks", to: page_path(@conn, :completed), class: "btn btn-success" %>
+          <%= link "Lackeys' Tasks", to: page_path(@conn, :lackies_tasks), class: "btn btn-danger" %>
+        </div>
+      </div>
+
       <%= if get_flash(@conn, :info) do %>
         <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <% end %>

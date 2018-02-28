@@ -106,4 +106,107 @@ defmodule TaskTracker.Tracker do
     Task.changeset(task, %{})
   end
 
+
+  alias TaskTracker.Tracker.Time_block
+
+  @doc """
+  Returns the list of timeblocks.
+
+  ## Examples
+
+      iex> list_timeblocks()
+      [%Time_block{}, ...]
+
+  """
+  def list_timeblocks do
+    Repo.all(Time_block)
+  end
+
+  @doc """
+  Gets a single time_block.
+
+  Raises `Ecto.NoResultsError` if the Time block does not exist.
+
+  ## Examples
+
+      iex> get_time_block!(123)
+      %Time_block{}
+
+      iex> get_time_block!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_time_block!(id), do: Repo.get!(Time_block, id)
+
+  @doc """
+  Creates a time_block.
+
+  ## Examples
+
+      iex> create_time_block(%{field: value})
+      {:ok, %Time_block{}}
+
+      iex> create_time_block(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_time_block(attrs \\ %{}) do
+    %Time_block{}
+    |> Time_block.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a time_block.
+
+  ## Examples
+
+      iex> update_time_block(time_block, %{field: new_value})
+      {:ok, %Time_block{}}
+
+      iex> update_time_block(time_block, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_time_block(%Time_block{} = time_block, attrs) do
+    time_block
+    |> Time_block.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def get_times!(id) do
+    query = from t in TaskTracker.Tracker.Time_block,
+      where: t.task_id == ^id ,
+      select: t
+    Repo.all(query)
+  end
+
+  @doc """
+  Deletes a Time_block.
+
+  ## Examples
+
+      iex> delete_time_block(time_block)
+      {:ok, %Time_block{}}
+
+      iex> delete_time_block(time_block)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_time_block(%Time_block{} = time_block) do
+    Repo.delete(time_block)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking time_block changes.
+
+  ## Examples
+
+      iex> change_time_block(time_block)
+      %Ecto.Changeset{source: %Time_block{}}
+
+  """
+  def change_time_block(%Time_block{} = time_block) do
+    Time_block.changeset(time_block, %{})
+  end
 end
